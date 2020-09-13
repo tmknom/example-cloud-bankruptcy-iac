@@ -1,0 +1,30 @@
+service: serverless-security
+
+frameworkVersion: '1'
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: go1.x
+  logRetentionInDays: 7
+  memorySize: 128
+  versionFunctions: false
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  alert:
+    handler: bin/main
+    environment:
+      INCOMING_WEBHOOK_URL: ${env:SLACK_INCOMING_WEBHOOK_URL}
+    events:
+      - cloudwatchEvent:
+          event:
+            source:
+              - 'aws.securityhub'
+            detail-type:
+              - 'Security Hub Findings - Imported'
