@@ -1,0 +1,8 @@
+Description: "Managed by Terraform"
+Resources:
+  MailSubscription:
+    Type: "AWS::SNS::Subscription"
+    Properties:
+      TopicArn: arn:aws:sns:ap-northeast-1:123456789012:alert-mail
+      Protocol: email
+      Endpoint: test@example.com
