@@ -1,0 +1,21 @@
+service: example
+
+frameworkVersion: '1'
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: go1.x
+  logRetentionInDays: 7
+  memorySize: 128
+  versionFunctions: false
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  logger:
+    handler: bin/main

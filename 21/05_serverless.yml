@@ -1,0 +1,18 @@
+service: example
+
+frameworkVersion: '1'
+
+provider:
+  name: aws
+  region: ap-northeast-1
+  runtime: go1.x
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  logger:
+    handler: bin/main
